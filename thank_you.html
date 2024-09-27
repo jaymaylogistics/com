@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            min-height: 100vh;
+            background: url('images/8.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white; /* Default text color is white for better contrast with background */
+        }
+        header {
+            background-color: #008080;
+            padding: 10px 0;
+            width: 100%;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+            color: white; /* Ensure header text color is white */
+        }
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            background-color: #C0C0C0;
+            padding: 10px 0;
+            width: 100%;
+        }
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.2em;
+            margin: 10px 15px;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .thank-you-container {
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 90%;
+            margin: 20px auto;
+            text-align: center;
+            animation: swing 5s infinite;
+        }
+        h1 {
+            color: #ff0000; /* Red color for the "Thank You" title */
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 16px;
+            color: #333; /* Dark text for better readability on light background */
+            margin-bottom: 20px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Image styling */
+        }
+        @keyframes swing {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(20px); }
+            50% { transform: translateX(-20px); }
+            75% { transform: translateX(20px); }
+            100% { transform: translateX(0); }
+        }
+        footer {
+            background-color: #C0C0C0;
+            color: black;
+            text-align: center;
+            padding: 10px 0;
+            width: 100%;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1>JayMay Logistics</h1>
+    </header>
+
+    <!-- Navigation Section -->
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="tracking.html">Tracking</a>
+        <a href="services.html">Services</a>
+        <a href="#">Pricing</a>
+        <a href="shipping.html">Start Shipping</a>
+        <a href="contact.html">Contact Us</a>
+    </nav>
+
+    <!-- Thank You Container -->
+    <div class="thank-you-container">
+        <h1>Thank You!</h1>
+        <p>Your shipping label application has been received.</p>
+        <p>An agent will contact you shortly for pickup arrangements.</p>
+        <img src="images/1.jpg" alt="Thank You Image">
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 JayMay Logistics. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

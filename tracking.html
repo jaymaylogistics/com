@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JayMay Logistics - Tracking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: white;
+            background: url('images/8.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background-color: #008080;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            width: 100%;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            background-color: #C0C0C0;
+            padding: 10px 0;
+            width: 100%;
+        }
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.2em;
+            margin: 10px 15px;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            width: 90%;
+            max-width: 500px;
+            margin: 50px auto;
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1em;
+        }
+        input[type="submit"] {
+            background-color: #008080;
+            color: white;
+            cursor: pointer;
+            margin-top: 20px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            width: 100%;
+        }
+        input[type="submit"]:hover {
+            background-color: #006666;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1>Track Your Shipment</h1>
+    </header>
+
+    <!-- Navigation Section -->
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="tracking.html">Tracking</a>
+        <a href="services.html">Services</a>
+        <a href="#">Pricing</a>
+        <a href="shipping.html">Start Shipping</a>
+        <a href="contact.html">Contact Us</a>
+    </nav>
+
+    <!-- Container Section -->
+    <div class="container">
+        <form action="result.html" method="get">
+            <label for="trackingNumber">Enter Your Tracking Number:</label>
+            <input type="text" id="trackingNumber" name="trackingNumber" required>
+            <input type="submit" value="Track">
+        </form>
+    </div>
+
+</body>
+</html>

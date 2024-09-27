@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shipment Status</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #fff;
+            background: url('images/8.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+        header {
+            background-color: #008080;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+        .container {
+            width: 90%;
+            margin: 20px auto;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .shipment-details {
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+        .details-box {
+            width: 100%;
+            padding: 15px;
+            background-color: #333;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .details-box h3 {
+            margin-top: 0;
+            font-size: 1.5em;
+        }
+        .details-box p {
+            margin: 5px 0;
+            font-size: 1em;
+        }
+        .status {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .status .light {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 20px;
+            background-color: #fff;
+        }
+        .status .on-hold.blink {
+            animation: blink-red 1s infinite;
+        }
+        .status .in-transit.blink {
+            animation: blink-green 1s infinite;
+        }
+        @keyframes blink-red {
+            0% { background-color: red; }
+            50% { background-color: #d3d3d3; }
+            100% { background-color: red; }
+        }
+        @keyframes blink-green {
+            0% { background-color: green; }
+            50% { background-color: #d3d3d3; }
+            100% { background-color: green; }
+        }
+        .navigation-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .navigation-buttons a {
+            text-decoration: none;
+            color: #0044cc;
+            font-size: 1em;
+            margin: 10px 15px;
+            padding: 10px 20px;
+            border: 1px solid #0044cc;
+            border-radius: 5px;
+            background-color: #f4f4f4;
+        }
+        .navigation-buttons a:hover {
+            background-color: #0044cc;
+            color: white;
+        }
+        .error-message {
+            color: red;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .hidden {
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                width: 80%;
+            }
+            .shipment-details {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            .details-box {
+                width: 30%;
+                margin-bottom: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>JayMay Logistics - Shipment Status</h1>
+</header>
+
+<div class="container">
+    <h2>Tracking Number: <span id="trackingNumber"></span></h2>
+
+    <div id="shipmentDetails" class="hidden">
+        <div class="shipment-details">
+            <div class="details-box">
+                <h3>Sender's Details</h3>
+                <p id="senderName"></p>
+                <p id="senderAddress"></p>
+                <p id="senderContact"></p>
+            </div>
+            <div class="details-box">
+                <h3>Receiver's Details</h3>
+                <p id="receiverName"></p>
+                <p id="receiverAddress"></p>
+                <p id="receiverContact"></p>
+            </div>
+            <div class="details-box">
+                <h3>Package Description</h3>
+                <p id="packageContent"></p>
+                <p id="packageWeight"></p>
+                <p id="packageOrigin"></p>
+                <p id="packageCost"></p>
+            </div>
+        </div>
+
+        <div class="status">
+            <div class="light on-hold" id="holdStatus"></div>
+            <p><strong>Status:</strong> On Hold</p>
+        </div>
+
+        <div class="status">
+            <div class="light in-transit" id="transitStatus"></div>
+            <p><strong>Status:</strong> In Transit</p>
+        </div>
+    </div>
+
+    <p id="noticeMessage" class="error-message"></p>
+
+    <div class="navigation-buttons">
+        <a href="index.html">Home</a>
+        <a href="tracking.html">Track Another Package</a>
+    </div>
+</div>
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const trackingNumber = urlParams.get('trackingNumber');
+    document.getElementById('trackingNumber').textContent = trackingNumber;
+
+    const shipments = {
+        'JML/038486220007': {
+            sender: { name: 'John Doe', address: '123 Sender St, City, Country', contact: '+1234567890' },
+            receiver: { name: 'Alice Johnson', address: '789 Receiver Rd, City, Country', contact: '+1122334455' },
+            status: 'on-hold',
+            notice: 'Your shipment is currently on hold.',
+            packageDescription: {
+                content: '5 pieces of pure gold rocks',
+                weight: '10kg',
+                origin: 'Ghana, West Africa',
+                cost: '$250'
+            }
+        },
+        'JML/034893747837': {
+            sender: { name: 'Michael Brown', address: '456 Sender Ave, City, Country', contact: '+2233445566' },
+            receiver: { name: 'Sophia White', address: '321 Receiver St, City, Country', contact: '+6655443322' },
+            status: 'on-hold',
+            notice: 'Your shipment is currently on hold.',
+            packageDescription: {
+                content: 'A collection of rare books',
+                weight: '8kg',
+                origin: 'London, UK',
+                cost: '$180'
+            }
+        },
+        'JML/603890330017': {
+            sender: { name: 'Emily Davis', address: '678 Sender Blvd, City, Country', contact: '+3344556677' },
+            receiver: { name: 'Liam Miller', address: '234 Receiver Lane, City, Country', contact: '+7766554433' },
+            status: 'on-hold',
+            notice: 'Your shipment is currently on hold.',
+            packageDescription: {
+                content: 'A set of kitchen appliances',
+                weight: '15kg',
+                origin: 'Tokyo, Japan',
+                cost: '$320'
+            }
+        },
+        'JML/836278837358': {
+            sender: { name: 'Olivia Wilson', address: '910 Sender Pkwy, City, Country', contact: '+4455667788' },
+            receiver: { name: 'Noah Moore', address: '567 Receiver Dr, City, Country', contact: '+8899776655' },
+            status: 'on-hold',
+            notice: 'Your shipment is currently on hold.',
+            packageDescription: {
+                content: 'A shipment of electronic gadgets',
+                weight: '5kg',
+                origin: 'Shenzhen, China',
+                cost: '$150'
+            }
+        },
+        'JML/037388721107': {
+            sender: { name: 'Ava Garcia', address: '112 Sender Ct, City, Country', contact: '+5566778899' },
+            receiver: { name: 'Ethan Martinez', address: '890 Receiver Blvd, City, Country', contact: '+9988776655' },
+            status: 'on-hold',
+            notice: 'Your shipment is currently on hold.',
+            packageDescription: {
+                content: 'A luxury wristwatch',
+                weight: '1kg',
+                origin: 'Geneva, Switzerland',
+                cost: '$900'
+            }
+        },
+        'JML/736194733870': {
+            sender: { name: 'Isabella Anderson', address: '223 Sender Way, City, Country', contact: '+6677889900' },
+            receiver: { name: 'Mason Rodriguez', address: '678 Receiver Blvd, City, Country', contact: '+1122334455' },
+            status: 'in-transit',
+            notice: 'Your shipment is in transit to the destination.',
+            packageDescription: {
+                content: 'A collection of sports equipment',
+                weight: '12kg',
+                origin: 'Sydney, Australia',
+                cost: '$200'
+            }
+        },
+        'JML/001287367499': {
+            sender: { name: 'James Taylor', address: '334 Sender Ln, City, Country', contact: '+7788990011' },
+            receiver: { name: 'Emma Lee', address: '123 Receiver Ave, City, Country', contact: '+9988776655' },
+            status: 'in-transit',
+            notice: 'Your shipment is in transit to the destination.',
+            packageDescription: {
+                content: 'A set of designer clothing',
+                weight: '7kg',
+                origin: 'Milan, Italy',
+                cost: '$350'
+            }
+        },
+        'JML/836110003784': {
+            sender: { name: 'Mia Harris', address: '445 Sender Rd, City, Country', contact: '+8899001122' },
+            receiver: { name: 'Alexander Clark', address: '456 Receiver Way, City, Country', contact: '+2233445566' },
+            status: 'in-transit',
+            notice: 'Your shipment is in transit to the destination.',
+            packageDescription: {
+                content: 'A set of art supplies',
+                weight: '4kg',
+                origin: 'Paris, France',
+                cost: '$120'
+            }
+        },
+        'JML/010139275674': {
+            sender: { name: 'Amelia Lewis', address: '556 Sender Ave, City, Country', contact: '+9900112233' },
+            receiver: { name: 'Daniel Walker', address: '789 Receiver Dr, City, Country', contact: '+3344556677' },
+            status: 'in-transit',
+            notice: 'Your shipment is in transit to the destination.',
+            packageDescription: {
+                content: 'A collection of vintage records',
+                weight: '6kg',
+                origin: 'Los Angeles, USA',
+                cost: '$270'
+            }
+        },
+        'JML/018378466830': {
+            sender: { name: 'Emmanuel Oduro', address: 'Post Office Box LG 90, Accra-Ghana', contact: '+233 249558523' },
+            receiver: { name: 'King Koddok', address: 'Boyce Ave. Athens, Ohio 45701', contact: '(740) 4578924' },
+            status: 'in-transit',
+            notice: 'Your shipment is in transit to the destination.',
+            packageDescription: {
+                content: 'A box of custom-made shoes',
+                weight: '3kg',
+                origin: 'Ghana, West Africa',
+                cost: '$100'
+            }
+        }
+    };
+
+    // Check if the tracking number is valid
+    if (shipments[trackingNumber]) {
+        // Display shipment details
+        const shipment = shipments[trackingNumber];
+        document.getElementById('shipmentDetails').classList.remove('hidden');
+        document.getElementById('senderName').textContent = shipment.sender.name;
+        document.getElementById('senderAddress').textContent = shipment.sender.address;
+        document.getElementById('senderContact').textContent = shipment.sender.contact;
+        document.getElementById('receiverName').textContent = shipment.receiver.name;
+        document.getElementById('receiverAddress').textContent = shipment.receiver.address;
+        document.getElementById('receiverContact').textContent = shipment.receiver.contact;
+
+        // Set package description
+        document.getElementById('packageContent').textContent = `Content - ${shipment.packageDescription.content}`;
+        document.getElementById('packageWeight').textContent = `Weight - ${shipment.packageDescription.weight}`;
+        document.getElementById('packageOrigin').textContent = `Origin - ${shipment.packageDescription.origin}`;
+        document.getElementById('packageCost').textContent = `Shipping Cost - ${shipment.packageDescription.cost}`;
+
+        // Set status
+        if (shipment.status === 'on-hold') {
+            document.getElementById('holdStatus').classList.add('blink');
+            document.getElementById('transitStatus').classList.remove('blink');
+            document.getElementById('noticeMessage').textContent = shipment.notice;
+        } else if (shipment.status === 'in-transit') {
+            document.getElementById('transitStatus').classList.add('blink');
+            document.getElementById('holdStatus').classList.remove('blink');
+            document.getElementById('noticeMessage').textContent = shipment.notice;
+        }
+    } else {
+        // Invalid tracking number
+        document.getElementById('shipmentDetails').classList.add('hidden');
+        document.getElementById('noticeMessage').textContent = 'Invalid Tracking Number';
+    }
+</script>
+
+</body>
+</html>

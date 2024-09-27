@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JayMay Logistics - Contact Us</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: black;
+            background: url('images/10.png') no-repeat center center fixed;
+            background-size: cover;
+        }
+        header {
+            background-color: #008080;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #C0C0C0;
+            padding: 10px 0;
+        }
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.2em;
+            margin: 0 15px;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            width: 90%; /* Adjusted width for better mobile fit */
+            max-width: 500px; /* Limits the maximum width on larger screens */
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 100px;
+        }
+        footer {
+            background-color: #008080;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        .contact-info {
+            margin-bottom: 20px;
+        }
+        .contact-info p {
+            margin: 5px 0;
+        }
+        .social-media a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #0044cc;
+            font-weight: bold;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        input, textarea {
+            width: 100%; /* Ensures inputs are full width */
+            padding: 10px;
+            margin-top: 5px;
+            font-size: 1em;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: black;
+            color: white;
+            cursor: pointer;
+            margin-top: 20px;
+            border: none;
+        }
+        input[type="submit"]:hover {
+            background-color: #0033aa;
+        }
+        @media (max-width: 768px) {
+            nav a {
+                margin: 0 10px;
+                font-size: 1em;
+            }
+            .container {
+                width: 95%; /* Further reduce width for small devices */
+                padding: 15px;
+            }
+            header h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Contact Us</h1>
+</header>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="tracking.html">Tracking</a>
+    <a href="services.html">Services</a>
+    <a href="#">Pricing</a>
+    <a href="shipping.html">Start Shipping</a>
+    <a href="contact.html">Contact Us</a>
+</nav>
+
+<div class="container">
+    <div class="contact-info">
+        <h2>JayMay Logistics</h2>
+        <p><strong>Address:</strong> 604 Carson Dr. Suite #ABB-809, Bear, Delaware 19701</p>
+        <p><strong>Telephone:</strong> (201) 870-0395</p>
+        <p><strong>Email:</strong> jaymaylogistics@protonmail.com</p>
+        <p><strong>Follow us:</strong></p>
+        <div class="social-media">
+            <a href="https://www.facebook.com/jaymaylogistics" target="_blank">Facebook</a>
+            <a href="https://www.twitter.com/jaymaylogistics" target="_blank">X</a>
+            <a href="https://www.instagram.com/jaymaylogistics" target="_blank">Instagram</a>
+        </div>
+    </div>
+
+    <form action="https://formspree.io/f/mwpeyqen" method="post">
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="address">House Address:</label>
+        <input type="text" id="address" name="address" required>
+
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="phone">Telephone Number:</label>
+        <input type="tel" id="phone" name="phone" required>
+
+        <label for="message">Your Message:</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+
+        <input type="submit" value="Send Message">
+    </form>
+</div>
+
+<footer>
+    <p>&copy; 2024 JayMay Logistics. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
